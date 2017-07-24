@@ -1,3 +1,4 @@
+
 function containsTwo15s(stats)
 {
 	var counter = 0;
@@ -18,7 +19,9 @@ function containsTwo15s(stats)
 
 function removeLowestRoll(rolls)
 {
-	rolls.sort();
+	rolls = rolls.sort(function(a,b) {
+		return a - b;
+	})
 	rolls[0] = 0;
 }
 
@@ -32,15 +35,12 @@ function addUpArray(rolls)
 	return finished;
 }
 
+var buttonClicked = false;
+var stats = [0, 0, 0, 0, 0, 0];
+var rolls = [0, 0, 0, 0];
+
 function main()
 {
-	/*
-		* roll 4D6, drop the lowest roll
-		* MUST have AT LEAST TWO 15s
-	*/
-	var rolls = [0, 0, 0, 0];
-	var stats = [0, 0, 0, 0, 0, 0];
-
 	while(containsTwo15s(stats) === false)
 	{
 		rolls = [0,0,0,0];
@@ -52,19 +52,29 @@ function main()
 			{
 				while(rolls[i] === 0)
 				{
-					rolls[i] = Math.floor((Math.random() * 6) + 1);
+					rolls[i] = (Math.floor(Math.random() * 6)+1);
 				}
-			}//filling up rolls array
-			
+			}
 			removeLowestRoll(rolls);
 			
 			stats[statFiller] = addUpArray(rolls);
 			rolls = [0,0,0,0];
 		}
 	}
-	console.log(rolls);
-	console.log(stats);
-	//jQuery changing the text of the UL to each stat in stats[6]
+	buttonClicked = true;
+}
+
+function statsSort(stats)
+{
+	console.log("statsSort " + stats);
+	stats = stats.sort(function(a,b) {
+		return a - b;
+	})
+	console.log("statsSort " + stats);
+}
+
+function printOut()
+{
 	$('.li1').text(stats[0]);
 	$('.li2').text(stats[1]);
 	$('.li3').text(stats[2]);
@@ -77,6 +87,23 @@ $(function() {
 	$("#statBtn").click( function()
            {
              main();
+             printOut();
+           }
+      );
+});
+
+$(function() {
+	$("#sortStatBtn").click( function()
+           {
+             if(buttonClicked === false)
+             {
+             	alert("Please click the left button first\n\nIf you already have please contact me via reddit.\n/u/Saleen_AF");
+             }
+             else
+             {
+             	statsSort(stats);
+             	printOut();
+      		 }
            }
       );
 });

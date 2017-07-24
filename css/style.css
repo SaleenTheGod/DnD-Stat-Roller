@@ -47,6 +47,16 @@ body {
   	padding: 20px;
 }
 
+#sortStatBtn
+{
+	background-color: #18bc9c;
+	border: 2px solid white;	
+}
+
+#sortStatBtn:hover {
+	background-color: white;
+	color: #18bc9c;
+}
 /*
 font-family: 'Oswald', sans-serif;
 */
