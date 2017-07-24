@@ -38,9 +38,6 @@ function main()
 		* roll 4D6, drop the lowest roll
 		* MUST have AT LEAST TWO 15s
 	*/
-
-
-
 	var rolls = [0, 0, 0, 0];
 	var stats = [0, 0, 0, 0, 0, 0];
 
@@ -58,7 +55,7 @@ function main()
 					rolls[i] = Math.floor((Math.random() * 6) + 1);
 				}
 			}//filling up rolls array
-			//debug console.log(rolls);
+			
 			removeLowestRoll(rolls);
 			
 			stats[statFiller] = addUpArray(rolls);
@@ -67,9 +64,7 @@ function main()
 	}
 	console.log(rolls);
 	console.log(stats);
-	
-
-	//jQuery chaning the text of the UL to each stat in statsp[]
+	//jQuery changing the text of the UL to each stat in stats[6]
 	$('.li1').text(stats[0]);
 	$('.li2').text(stats[1]);
 	$('.li3').text(stats[2]);
@@ -77,6 +72,7 @@ function main()
 	$('.li5').text(stats[4]);
 	$('.li6').text(stats[5]);
 }
+
 $(function() {
 	$("#statBtn").click( function()
            {
